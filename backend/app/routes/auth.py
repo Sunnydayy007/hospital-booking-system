@@ -30,7 +30,4 @@ def login(
             detail="Invalid username or password.",
         )
 
-    return {
-        "message": "Login successful.",
-        "user": user,
-    }
+    return user

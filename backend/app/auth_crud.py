@@ -1,6 +1,8 @@
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
+from app.security import create_access_token
+
 
 def authenticate_user(
     db: Session,
@@ -25,8 +27,21 @@ def authenticate_user(
     if user is None:
         return None
 
-    return {
+    user_data = {
         "id": user.id,
         "username": user.username,
         "role": user.role,
+    }
+
+    access_token = create_access_token(
+        {
+            "sub": user.username,
+            "role": user.role,
+        }
+    )
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": user_data,
     }
