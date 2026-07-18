@@ -11,6 +11,7 @@ from app.slot_models import AppointmentSlot
 from app.routes.departments import router as department_router
 from app.routes.appointments import router as appointment_router
 from app.routes.slots import router as slot_router
+from app.routes.auth import router as auth_router
 
 app = FastAPI(
     title="Hospital Booking API",
@@ -36,6 +37,7 @@ app.add_middleware(
 app.include_router(department_router)
 app.include_router(appointment_router)
 app.include_router(slot_router)
+app.include_router(auth_router)
 
 
 @app.get("/")
